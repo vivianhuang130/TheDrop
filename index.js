@@ -15,8 +15,18 @@ mongoose.connect('mongodb://localhost/the-drop', (err) => {
   console.log(err || "Connected to MongoDB.")
 })
 
-app.use(logger('dev'))
-app.use(bodyParser.json())
+app.use(morgan('dev'));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+
+
+app.use(session({ secret: 'WDI-GENERAL-ASSEMBLY-EXPRESS' }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+require('./config/passport')(passport);
+///
 
 app.get('/', (req, res) => {
   res.json('root route')
