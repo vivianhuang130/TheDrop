@@ -1,5 +1,9 @@
 const mongoose = require('mongoose')
 var bcrypt   = require('bcrypt-nodejs');
+<<<<<<< HEAD
+=======
+
+>>>>>>> ecc1d054579c5248ed0eec90e4113a61e0323e73
 var User = mongoose.Schema({
   name: {type: String, required:true},
   local: {
@@ -18,4 +22,9 @@ User.methods.encrypt = function(password){
 User.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.local.password);
 };
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ecc1d054579c5248ed0eec90e4113a61e0323e73
 module.exports = User
