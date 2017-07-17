@@ -20,7 +20,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 
 
-app.use(session({ secret: 'WDI-GENERAL-ASSEMBLY-EXPRESS' }));
+app.use(session({ secret: 'THE-DROP-PROJECT-3' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
