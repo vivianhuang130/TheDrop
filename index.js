@@ -5,9 +5,9 @@ const
   logger = require('morgan'),
   bodyParser = require('body-parser'),
   mongoose = require('mongoose'),
-  port = 3000,
+  port = 3000
 
-mongoose.connect('mongodb://the-drop', (err) => {
+mongoose.connect('mongodb://localhost/the-drop', (err) => {
   console.log(err || "Connected to MongoDB.")
 })
 
