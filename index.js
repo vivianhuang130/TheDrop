@@ -14,7 +14,9 @@ mongoose.connect('mongodb://localhost/the-drop', (err) => {
 app.use(logger('dev'))
 app.use(bodyParser.json())
 
-
+app.get('/', (req, res) => {
+  res.json('root route')
+})
 
 app.listen(port, function(err) {
   console.log(err || `Server is running on ${port}`)
