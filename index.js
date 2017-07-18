@@ -12,7 +12,11 @@ const
   port = 3000,
   User = require('./models/User.js'),
   Comment = require('./models/Comment.js'),
-  SurfLocation = require('./models/SurfLocation.js')
+  SurfLocation = require('./models/SurfLocation.js'),
+  weatherController = require('./controllers/weather.js')
+  		
+
+
 
 
 mongoose.connect('mongodb://localhost/the-drop', (err) => {
