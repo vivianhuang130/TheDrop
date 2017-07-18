@@ -45,6 +45,12 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
+app.use(function(req, res, next) {
+  setTimeout(function() {
+    next()
+  }, 1000)
+})
+
 require('./config/passport')(passport);
 <<<<<<< HEAD
 
