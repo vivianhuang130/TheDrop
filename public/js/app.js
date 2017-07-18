@@ -122,7 +122,7 @@ function boxClickHandler() {
         content: `<h5>${name}</h5><img src='${icon}'/><span id='temp'> ${temp}</span>`
       }
     });
-  }, 1500)
+  }, 2000)
   $.ajax(requestSettings).done(cb)
 
 }
