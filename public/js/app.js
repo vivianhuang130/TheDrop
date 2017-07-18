@@ -17,7 +17,7 @@ var surfSpots = [
   {name: 'Staircase Beach', city: 'Malibu', lat: 34.024740, long: -118.565140},
   {name: 'Hermosa Beach', city: 'Hermosa Beach', lat: 33.513852, long: -118.241018},
   {name: '36th Street Beach', city: 'Newport Beach', lat: 33.6147, long: -117.9379},
-  {name: '64th Place Beach', city: 'Newport Beach', lat: 33.7464, long: -118.123}
+  {name: '64th Place Beach', city: 'Long Beach', lat: 33.7464, long: -118.123}
 ]
 
 locationList = $('#location-list')
@@ -122,7 +122,7 @@ function boxClickHandler() {
         content: `<h5>${name}</h5><img src='${icon}'/><span id='temp'> ${temp}</span>`
       }
     });
-  }, 1500)
+  }, 2000)
   $.ajax(requestSettings).done(cb)
 
 }
