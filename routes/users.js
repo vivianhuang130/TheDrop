@@ -24,6 +24,7 @@ userRouter.route('/signup')
 	}));
 
 userRouter.get('/profile', isLoggedIn , (req,res) => {
+	console.log("in profile")
   res.render('profile', {user: req.user})
 });
 
@@ -34,8 +35,9 @@ userRouter.get('/logout', (req,res) => {
 
 // a method used to authorize a user BEFORE allowing them to proceed to the profile page:
 function isLoggedIn(req, res, next){
+	console.log("its authenticated" + req.isAuthenticated())
 	if(req.isAuthenticated()) return next()
-	res.redirect('/')
+	res.redirect('/login')
 }
 
 module.exports = userRouter
