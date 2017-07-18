@@ -46,15 +46,6 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(flash());
-
-// require('./config/passport')(passport);
-
-//ejs config
-app.set('view engine', "ejs")
-// app.use(ejsLayouts)
-
-
-
 app.use(session({
   secret: 'THE-DROP-PROJECT-3',
   cookie:{maxAge : 60000000},
@@ -67,11 +58,24 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req, res, next) => {
+  console.log(req.user);
 	app.locals.currentUser = req.user // currentUser now available in ALL views
 	app.locals.loggedIn = !!req.user // a boolean loggedIn now available in ALL views
 
 	next()
 })
+// require('./config/passport')(passport);
+
+//ejs config
+app.set('view engine', "ejs")
+// app.use(ejsLayouts)
+
+
+
+
+
+
+
 
 
 
@@ -99,7 +103,7 @@ app.get('/search/:searchTerm', weatherController.search)
 
 //route for user profile (defined in users.js)
 
-app.use('/',userRoutes)
+app.use('/', userRoutes)
 
 /////
 
