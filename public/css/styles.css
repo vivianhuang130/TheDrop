@@ -1,26 +1,49 @@
 /*! bulma.io v0.4.2 | MIT License | github.com/jgthms/bulma */
 
 .container h1 {
-  font-size: 28px;
+  margin-top: 20px;
+  font-size: 24px;
+  padding-bottom: 5px;
 }
 
 #results {
   font-size: 16px;
 }
 
+.control {
+  width: 200px;
+  margin: 0 auto;
+}
+
+.input-box {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#city-input {
+  width: 200px;
+  float: left;
+  margin-left: 8px;
+}
+
+.head {
+  width: 500px;
+}
+
 .wrapper {
-  width: 600px;
-  height: 600px;
+  width: 900px;
+  height: 500px;
   margin: 0 auto;
   /*background: lightblue;*/
 }
 
 #map {
-  width: 300px;
-  height: 350px;
-  border: 1px solid rgba(0, 0, 0, 0.9);
+  width: 575px;
+  height: 475px;
+  border: 2px solid rgba(255, 255, 255, 1);
   border-radius: 5px;
-  margin: 10px;
+  margin: 10px 10px 10px 25px;
   -webkit-box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.4);
   -moz-box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.4);
   box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.4);
@@ -30,10 +53,38 @@
 #location-list {
   float: left;
   width: 250px;
+  height: 475px;
   /*background: gray;*/
-  margin: 25px 0 0 10px;
-  font-size: 14px;
-  line-height: 25px;
+  margin: 10px 0 0 10px;
+  padding-top: 18px;
+  font-size: 18px;
+  line-height: 36px;
+  background: lightblue;
+  border: 2px solid white;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.4);
+  box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.4);
+}
+
+#location-list li:hover {
+  /*text-decoration: underline;*/
+  color: dodgerblue;
+  font-style: italic;
+}
+
+img {
+  width: 20px;
+  line-height: 40px;
+  margin-top: 5px;
+}
+
+#temp {
+
+}
+
+#info {
+  height: 10px;
 }
 
 .container {

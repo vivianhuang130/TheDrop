@@ -1,67 +1,67 @@
-var LocalStrategy = require('passport-local').Strategy;
-var User = require('../models/user');
+const
+  passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy,
+  User = require('../models/user')
 
-module.exports = function(passport){
+//console.log(User)
 
-  passport.serializeUser(function(user, done){
+  passport.serializeUser((user, done) => {
     done(null, user.id);
   });
 
-  passport.deserializeUser(function(id, callback){
-    User.findById(id, function(err, user){
+  passport.deserializeUser((id, callback) => {
+    User.findById(id, (err, user) => {
       callback(err, user)
     })
   })
 
+  // LOCAL SIGNUP
   passport.use('local-signup', new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password',
-    passReqToCallback: true
-  }, function(req, email, password, callback) {
-    process.nextTick(function() {
-
-      // Find a user with this e-mail
-      User.findOne({ 'local.email' :  email }, function(err, user) {
-        if (err) return callback(err);
-
-        // If there already is a user with this email
-        if (user) {
-          return callback(null, false, req.flash('signupMessage', 'This email is already used.'));
-        } else {
-        // There is no email registered with this email
-
-          // Create a new user
-          var newUser            = new User();
-          newUser.local.email    = email;
-          newUser.local.password = newUser.encrypt(password);
-
-          newUser.save(function(err) {
-            if (err) throw err;
-            return callback(null, newUser);
-          });
+  	usernameField: 'email',
+  	passwordField: 'password',
+  	passReqToCallback: true
+  }, (req, email, password, done) => {
+    console.log("let us find the user")
+    console.log(email)
+    // process.nextTick(function(){
+      User.findOne({'local.email': email}, (err, user) => {
+    		if(err)  {
+          console.log("there was an error" + err)
+          return done(err)
         }
-      });
-    });
-  }));
+    		if(user)  {
+          console.log("there was a user" + user)
+          return done(null, false, req.flash('signupMessage', 'That email is taken.'))
+        }
+        console.log("user not found")
+    		var newUser = new User()
+        newUser.local.name = req.body.name
+    		newUser.local.email = email
+    		newUser.local.password = newUser.generateHash(password)
+        console.log("about to save" + newUser)
+    		newUser.save((err) => {
+    			if(err) throw err
+    			return done(null, newUser, null)
+    		})
+    	})
+    // })
+
+  }))
 
   passport.use('local-login', new LocalStrategy({
-    usernameField : 'email',
-    passwordField : 'password',
-    passReqToCallback : true
-  }, function(req, email, password, callback) {
+	usernameField: 'email',
+	passwordField: 'password',
+	passReqToCallback: true
+}, (req, email, password, done) => {
+	User.findOne({'local.email': email}, (err, user) => {
+		if(err) return done(err)
+		if(!user) return done(null, false, req.flash('loginMessage', 'No user found...'))
+    console.log("user found in login valid password?" + user.validPassword(password))
 
-     // Search for a user with this email
-     User.findOne({ 'local.email' :  email }, function(err, user) {
-       if (err) return callback(err);
+		if(!user.validPassword(password)) return done(null, false, req.flash('loginMessage', 'Wrong Password.'))
+		return done(null, user)
+	})
+}))
 
-        // If no user is found
-       if (!user) return callback(null, false, req.flash('loginMessage', 'No user found.'));
 
-       // Wrong password
-       if (!user.validPassword(password))           return callback(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
-
-       return callback(null, user);
-     });
-   }));
-
-}
+module.exports = passport
