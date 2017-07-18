@@ -36,17 +36,17 @@
     </div>
     <script>
     var map
-      function initialize () {
-        map = new GMaps ({
-          el: '#map',
-          lat: 34.013321,
-          lng: -118.500051,
-          zoom: 12,
-          markers: [
-            {lat: 34.013321, lng: -118.500051},
-          ]
-        });
-      }
+    setTimeout(function initialize () {
+      map = new GMaps ({
+        el: '#map',
+        lat: 34.013321,
+        lng: -118.500051,
+        zoom: 12,
+        markers: [
+          {lat: 34.013321, lng: -118.500051},
+        ]
+      });
+    }, 800)
     </script>
     <script src="/js/app.js"></script>
   </body>
