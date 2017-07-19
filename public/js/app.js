@@ -38,14 +38,9 @@ searchButton.on('click', function() {
   function cb(d) {
     $('#results').empty()
     console.log(d)
-    // var temp = d.current_observation.feelslike_string
-    // var city = d.current_observation.display_location.city
-    // var cityLat = d.current_observation.display_location.latitude
-    // var cityLong = d.current_observation.display_location.longitude
-    // var icon = d.current_observation.icon_url
 
     $('#results').append(`${city}: ${temp}<br>`)
-    // $('#results').append(`Lat: ${cityLat} Long: ${cityLong}`)
+
     map.addMarker({
       lat: `${cityLat}`,
       lng: `${cityLong}`,
@@ -111,6 +106,8 @@ function boxClickHandler() {
     });
   }, 2500)
   $.ajax(requestSettings).done(cb)
+
+  //pulls weather info
   $.ajax({
     type: 'get',
     url: weatherRequestUrl

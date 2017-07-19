@@ -85,9 +85,6 @@ app.get('/', weatherController.index)
 
 app.get('/search/:searchTerm', weatherController.search)
 
-// app.get('/index', surfController.index)
-// app.get('/show/:id', surfController.show)
-
 //route for user profile (defined in users.js)
 
 app.use('/', userRoutes)
