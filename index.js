@@ -17,7 +17,6 @@ const
   Comment = require('./models/Comment.js'),
   SurfLocation = require('./models/SurfLocation.js'),
   weatherController = require('./controllers/weather.js'),
-  surfController = require('./controllers/surf.js'),
   passportConfig = require('./config/passport.js'),
   userRoutes = require('./routes/users.js')
 
