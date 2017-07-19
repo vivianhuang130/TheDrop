@@ -39,6 +39,8 @@ var conn = mongoose.connection;
 
 var gfs;
 var Grid = require("gridfs-stream");
+
+
 Grid.mongo = mongoose.mongo;
 
 conn.once("open", function(){
@@ -50,7 +52,8 @@ conn.once("open", function(){
 
   //second parameter is multer middleware.
   app.post("/", upload.single("avatar"), function(req, res, next){
-    console.log("current user is: ", req.user);
+    console.log("current user is: " + req.user._id);
+    console.log("file name is: " + req.file.originalname);
     //create a gridfs-stream into which we pipe multer's temporary file saved in uploads. After which we delete multer's temp file.
     var writestream = gfs.createWriteStream({
       filename: req.user._id + req.file.originalname
@@ -61,9 +64,10 @@ conn.once("open", function(){
       .on("end", function(){fs.unlink("./uploads/"+ req.file.filename, function(err){
         //update your user
         //uodate your profile pic
-        User.update({_id: req.user._id, profile_pic: req.user._id + req.file.originalname},
+        User.update({_id: req.user._id},{_id: req.user._id, profile_pic: req.user._id + req.file.originalname},
         function(err, user){
-          res.redirect('/profile') 
+          console.log("successfully update user pic")
+          res.redirect('/profile')
         })
       })})
         .on("err", function(){res.send("Error uploading image")})
