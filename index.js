@@ -50,14 +50,22 @@ conn.once("open", function(){
 
   //second parameter is multer middleware.
   app.post("/", upload.single("avatar"), function(req, res, next){
+    console.log("current user is: ", req.user);
     //create a gridfs-stream into which we pipe multer's temporary file saved in uploads. After which we delete multer's temp file.
     var writestream = gfs.createWriteStream({
-      filename: req.file.originalname
+      filename: req.user._id + req.file.originalname
     });
     //
     // //pipe multer's temp file /uploads/filename into the stream we created above. On end deletes the temporary file.
     fs.createReadStream("./uploads/" + req.file.filename)
-      .on("end", function(){fs.unlink("./uploads/"+ req.file.filename, function(err){res.send("success")})})
+      .on("end", function(){fs.unlink("./uploads/"+ req.file.filename, function(err){
+        //update your user
+        //uodate your profile pic
+        User.update({_id: req.user._id, profile_pic: req.user._id + req.file.originalname},
+        function(err, user){
+          res.redirect('/profile') 
+        })
+      })})
         .on("err", function(){res.send("Error uploading image")})
           .pipe(writestream);
   });
@@ -86,7 +94,7 @@ conn.once("open", function(){
     });
   });
 });
-
+app.set("views", "./views");
 
 
 app.use(morgan('dev'));
