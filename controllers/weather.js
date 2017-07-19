@@ -20,15 +20,6 @@ module.exports = {
       res.json(JSON.parse(body))
     })
 
-    // var searchTerm = req.params.searchTerm
-    // var weatherApiUrl = 'http://api.wunderground.com/api/'
-    // // YOUR_API_KEY/conditions/q/CA/THE_DESIRED_CITY.json
-    // var weatherApiKey = process.env.WEATHER_API_KEY
-    // var weatherRequestUrl = `${weatherApiUrl}${weatherApiKey}/conditions/q/CA/${searchTerm}.json`
-    //
-    // request.get(weatherRequestUrl, (err, response, body) => {
-    //   res.json(JSON.parse(body))
-    // })
   }
 
 }
