@@ -34,6 +34,13 @@ function postLogin(request, response) {
   return loginProperty(request, response)
 }
 
+// get 'form', editBio
+function getEditBio(request, response) {
+  console.log("Ok, loaded")
+  response.render("/editBio.ejs")
+  response.redirect('/profile.ejs')
+}
+
 // GET /logout
 function getLogout(request, response) {
   request.logout();
@@ -51,5 +58,6 @@ module.exports = {
   getSignup: getSignup,
   postSignup: postSignup,
   getLogout: getLogout,
+  getEditBio: getEditBio,
   secret: secret
 }
