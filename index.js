@@ -16,13 +16,13 @@ const
   passport = require('passport'),
   flash = require('connect-flash'),
   port = 3000,
-  User = require('./models/user'),
+  User = require('./models/User'),
   Comment = require('./models/Comment.js'),
   SurfLocation = require('./models/SurfLocation.js'),
 
   weatherController = require('./controllers/weather.js'),
   passportConfig = require('./config/passport.js'),
-  userRoutes = require('./routes/Users.js')
+  userRoutes = require('./routes/users.js')
 
 
 
