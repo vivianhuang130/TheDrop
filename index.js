@@ -28,7 +28,7 @@ const
 
 //envir. port
 const
-  mongoConnectionString = process.env.MONGODB_URL || 'mongodb://localhost/the-drop'
+  mongoConnectionString = process.env.MONGODB_URI || 'mongodb://localhost/the-drop'
 
 
 //mongoose connection
