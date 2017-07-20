@@ -15,7 +15,7 @@ const
   cookieParser = require('cookie-parser'),
   passport = require('passport'),
   flash = require('connect-flash'),
-  port = 3000,
+  port = process.env.PORT || 3000,
   User = require('./models/User'),
   Comment = require('./models/Comment.js'),
   SurfLocation = require('./models/SurfLocation.js'),
