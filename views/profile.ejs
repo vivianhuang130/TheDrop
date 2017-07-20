@@ -1,43 +1,64 @@
-<div class="page-header">
-    <h1><%= user.local.name || user.facebook.name %></h1>
-    <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-</div>
-<div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-        <div class="well">
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title></title>
+  </head>
+  <body>
+    <% include ../public/templates/navbar %>
 
-            <% if(user.facebook.id) { %>
+    <div class='container'>
+      <div class="page-header">
+          <h1><%= user.local.name || user.facebook.name %></h1>
+          <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+      </div>
+      <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+              <div class="well">
 
-                <h3>Facebook</h3>
-                <p>
-                    <!-- <strong>id</strong>: <%= user.facebook.id %><br>
-                    <strong>token</strong>: <%= user.facebook.token %><br> -->
-                    <strong>email</strong>: <%= user.facebook.email %><br>
-                    <strong>name</strong>: <%= user.facebook.name %>
-                </p>
+                  <% if(user.facebook.id) { %>
 
-            <% } else { %>
+                      <h3>Facebook</h3>
+                      <p>
+                          <!-- <strong>id</strong>: <%= user.facebook.id %><br>
+                          <strong>token</strong>: <%= user.facebook.token %><br> -->
+                          <strong>email</strong>: <%= user.facebook.email %><br>
+                          <strong>name</strong>: <%= user.facebook.name %>
+                      </p>
 
-            <h3>Locally Stored User</h3>
-                <p>
-                    <strong>Name</strong>: <%= user.local.name %><br>
+                  <% } else { %>
 
-                </p>
+                  <h3>Locally Stored User</h3>
+                      <p>
+                          <strong>Name</strong>: <%= user.local.name %><br>
 
-            <% } %>
-            <small> <%= user.local.location%></small></h1>
+                      </p>
 
-            <h3>Bio</h3>
-            <%= user.local.bio %>
-<a href="/editBio">edit</a>
-            <hr>
-            <h3>Favorite</h3>
+                  <% } %>
+                  <small> <%= user.local.location%></small></h1>
+
+                  <h3>Bio</h3>
+                  <%= user.local.bio %>
+                    <a href="/editBio">edit</a>
+                    <div class='hr'>
+                      <hr>
+                    </div>
+                  <h3>Favorite Spots</h3>
 
 
-            <hr>
-            <h3> <%= user.local.name %> Comments </h3>
-            <hr>
-            <a href="/">Surf Report</a>
-        </div>
+                  <div class='hr'>
+                    <hr>
+                  </div>
+                  <h3> <%= user.local.name %>'s Comments </h3>
+                  <div class='hr'>
+                    <hr>
+                  </div>
+                  <a href="/">Surf Report</a>
+              </div>
+          </div>
+      </div>
     </div>
-</div>
+
+  </body>
+</html>
