@@ -141,7 +141,7 @@ function boxClickHandler() {
 
       }
     });
-  }, 2500)
+  }, 4000)
   $.ajax(requestSettings).done(cb)
 
   //pulls weather info

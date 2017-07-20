@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="https://fonts.googleapis.com/css?family=Original+Surfer" rel="stylesheet">
     <meta charset="utf-8">
     <link rel="stylesheet" href="/css/styles.css">
-    <title></title>
+    <title>Signup</title>
   </head>
   <body>
     <% include ../public/templates/navbar %>
 
-    <div class='container'>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1949429758633181";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
 
+    <div class='container'>
+      <div class='container2'>
           <h1>Signup</h1>
 
           <form action="/signup" method="post">
@@ -34,20 +45,23 @@
             </div>
             <div class="field">
               <div class='control'>
-                <input type="text-area" class="input is-info" name="bio" placeholder='Bio'>
+                <input type="text" class="input is-info" name="bio" placeholder='Bio'>
               </div>
             </div>
 
-            <button type="submit" class="button is-primary">Signup</button>
+            <button type="submit" class="button is-info">Signup</button>
           </form>
 
           <div class='hr'>
             <hr>
           </div>
-          <p><a href="/login">Login</a></p>
-          <h2>Login With <a href="/auth/facebook" class="btn btn-primary btn-lg">Facebook</a></h2>
-          <p>Go back <a href="/">Home</a></p>
-
+          <div class="fb-login-button" data-width="20" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div><br><br>
+          <!-- <h2>Login With <a href="/auth/facebook"><img src='https://cdn0.iconfinder.com/data/icons/social-flat-rounded-rects/512/facebook-256.png' id='fb_img'/></a></h2> -->
+          <span class='surf-font'>
+            <p>Already have an account? <a href="/login">Login</a></p>
+            <p>Go back <a href="/">Home</a></p>
+          </span>
+      </div>
     </div>
   </body>
 </html>

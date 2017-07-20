@@ -16,7 +16,7 @@ const
   passport = require('passport'),
   flash = require('connect-flash'),
   port = 3000,
-  User = require('./models/User'),
+  User = require('./models/user'),
   Comment = require('./models/Comment.js'),
   SurfLocation = require('./models/SurfLocation.js'),
 
