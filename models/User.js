@@ -20,7 +20,6 @@ var userSchema = mongoose.Schema({
   comments: [{type:mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
 
-
 userSchema.methods.generateHash = function(password){
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 };
