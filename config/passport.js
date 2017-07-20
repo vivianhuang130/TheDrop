@@ -22,6 +22,9 @@ const
   	passReqToCallback: true
   }, (req, email, password, done) => {
 
+    console.log("let us find the user")
+    console.log(email)
+
       User.findOne({'local.email': email}, (err, user) => {
     		if(err)  {
           console.log("there was an error" + err)
