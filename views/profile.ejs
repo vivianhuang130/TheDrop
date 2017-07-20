@@ -2,49 +2,122 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
         <title></title>
     </head>
     <body>
-<h1>
-<%= user.local.name %>
-<small> <%= user.local.location%></small></h1>
-<h3>Bio</h3>
-<div id="bio">
-    <input type="textField" id="bio-input" placeholder="Bio">
-    <button id="addBio">Submit</button>
+
+  <div>
+      <form action=“/” method=“POST” enctype=“multipart/form-data” class=“ppForm”>
+        <input type=“file” name=“avatar”>
+        <input class=“amandaBtn” type=“submit” value=“submit”>
+      </form>
+  </div>
+
+
+  <div class=“page-header”>
+    <h1><%= user.local.name || user.facebook.name %></h1>
+    <a href=“/logout” class=“btn btn-default btn-sm”>Logout</a>
+  </div>
+
+
+
+  <div class=“row”>
+    <div class=“col-sm-5 col-sm-offset-3”>
+      <img class=“localPp”  src= "<%= user.profile_pic %>" >
     </div>
-    <button id="editBio">Edit Bio</button>
+
+    <div class=“col-sm-5 col-sm-offset-3”>
+      <% if(user.facebook.id) { %>
+        <h2> <%= user.facebook.name %></h2>
+      <% } else { %>
+        <h2> <%= user.local.name %></h2>
+        <h3> <%= user.location %></h3>
+      <% } %>
+    </div>
+  </div>
+
+  <div>
+    <h3>Bio</h3>
+      <div id="userBioDiv">
+        <p><%= user.bio %></p>
+      </div>
+      <div id="bio" style="display:none">
+        <input type="textField" id="bio-input" placeholder="Bio">
+        <button type='submit' id="addBio">Submit</button>
+      </div>
+        <button id="editBio">Edit Bio</button>
+  </div>
+
 <hr>
-<h3>Favorites</h3>
+
+  <div id="favorites">
+    <h3>Favorites</h3>
+  </div>
+
 <hr>
-<h3> <%= user.local.name %> Comments </h3>
+
+<div id="comments">
+  <h3> <%= user.local.name %> Comments </h3>
+</div>
+
 <hr>
-<a href="/">Surf Report</a>
-<% if(loggedIn) { %>
+
+  <a href="/">Surf Report</a>
+
+  <% if(loggedIn) { %>
     <a href="/logout">Logout</a>
-<% } %>
+  <% } %>
+
+
+
+<input id="userId" type="hidden" value="<%=user._id%>">
+
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script type="text/javascript">
-//variables
+
 var userBio = $('#bio-input')
 var submitBio = $('#addBio')
 var editBio = $('#editBio')
-// submit button
-submitBio.on('click', function(){
-    var resquestSettings = {
-        method: 'post',
+var bio = $('#bio')
+var userId = $('#userId')
+var updatedBio = $('userBioDiv')
+
+
+  editBio.click(function(){
+    console.log('click')
+    bio.show();
+  });
+
+
+  submitBio.click(function(){
+    var requestSettings = {
+        method: 'patch',
         url: '/profile',
-        data: JSON.stringify({body: userBio.val(), contentType: 'application/json'}
+        data: JSON.stringify({ mytext:userBio.val(), data: userId.val() }),
+        contentType: 'application/json'
+      }
         function callback(d){
             console.log(d)
-            populateBioUL()
+
         }
-    }
-})
-if ($('.localPp').attr("src") || $('.fbPp').attr("src")) {
-    $('.amandaBtn').val('Change Picture')
-}
-//edit button
+        setTimeout(function() {
+          location.reload()
+        }, 1000)
+
+        $.ajax(requestSettings).done(callback)
+    })
+
+
+
+
+
+
+  if ($('.localPp').attr("src")){
+      $('.amandaBtn').val('Change Picture')
+  }
+
 </script>
 </body>
 </html>
