@@ -22,7 +22,7 @@ const
 
   weatherController = require('./controllers/weather.js'),
   passportConfig = require('./config/passport.js'),
-  userRoutes = require('./routes/users.js')
+  userRoutes = require('./routes/Users.js')
 
 
 
