@@ -1,22 +1,28 @@
-const mongoose = require('mongoose')
+const
+  mongoose = require('mongoose')
 var bcrypt   = require('bcrypt-nodejs');
 
+
 var userSchema = mongoose.Schema({
-  local: {
+  local : {
     name: String,
     password: String,
     email: String,
   },
+<<<<<<< HEAD
   facebook: {
 		id: String,
 		name: String,
 		token: String,
 		email: String
 	},
+=======
+
+>>>>>>> 45f9009c68fcdcb6c0bd35722082542405b2472a
   profile_pic: {type: String},
   location: {type: String},
   bio: {type:String},
-  favorite: {type:String},
+  favorites: {type:String},
   comments: [{type:mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
 
