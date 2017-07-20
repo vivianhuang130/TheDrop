@@ -3,6 +3,7 @@ const
 	express = require('express'),
 	passport = require('passport'),
 	userRouter = express.Router()
+	User = require('../models/user'),
 
 userRouter.route('/login')
 	.get((req,res) => {
@@ -23,10 +24,18 @@ userRouter.route('/signup')
 		failureRedirect: '/signup'
 	}));
 
-userRouter.get('/profile', isLoggedIn , (req,res) => {
-	console.log("in profile")
-  res.render('profile', {user: req.user})
+userRouter.get('/profile/', isLoggedIn , (req,res) => {
+			console.log("in profile")
+		  res.render('profile', {user: req.user})
 });
+
+userRouter.get('/profile/:id', (req, res) => {
+	User.findById(req.params.id, (err, user) => {
+		if (err) console.log(err)
+		console.log(user)
+		res.render('users', {user: user})
+	})
+})
 
 userRouter.get('/logout', (req,res) => {
   req.logout()
@@ -39,5 +48,10 @@ function isLoggedIn(req, res, next){
 	if(req.isAuthenticated()) return next()
 	res.redirect('/login')
 }
+
+
+
+
+
 
 module.exports = userRouter

@@ -22,7 +22,7 @@ const
   	passReqToCallback: true
   }, (req, email, password, done) => {
     console.log("let us find the user")
-    console.log(email)
+    console.log(local.email)
     // process.nextTick(function(){
       User.findOne({'local.email': email}, (err, user) => {
     		if(err)  {
@@ -44,7 +44,7 @@ const
     			return done(null, newUser, null)
     		})
     	})
-    // })
+
 
   }))
 

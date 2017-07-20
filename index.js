@@ -21,14 +21,15 @@ const
   userRoutes = require('./routes/users.js')
 
 
+
 //envir. port
 const
-  mongoConnectionString = process.env.MONGODB_URL || 'mongodb://localhost/passport-authentication'
+  mongoConnectionString = process.env.MONGODB_URL || 'mongodb://localhost/the-drop'
 
 //mongoose connection
 
 mongoose.connect(mongoConnectionString, (err) => {
-	console.log(err || "Connected to MongoDB (passport-authentication)")
+	console.log(err || "Connected to MongoDB" + mongoConnectionString)
 })
 
 require('./config/passport');
@@ -64,18 +65,10 @@ app.use((req, res, next) => {
 
 	next()
 })
-// require('./config/passport')(passport);
+
 
 //ejs config
 app.set('view engine', "ejs")
-// app.use(ejsLayouts)
-
-
-
-
-
-
-
 
 
 
@@ -93,10 +86,6 @@ app.use(function(req, res, next) {
 })
 
 
-
-///
-
-
 //root route
 app.get('/', weatherController.index)
 app.get('/search/:searchTerm', weatherController.search)
@@ -105,7 +94,8 @@ app.get('/search/:searchTerm', weatherController.search)
 
 app.use('/', userRoutes)
 
-/////
+
+
 
 app.listen(port, (err) => {
   console.log(err || `Server is running on ${port}`)});

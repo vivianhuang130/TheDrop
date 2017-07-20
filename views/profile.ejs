@@ -1,16 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+
 
 <h1>
 <%= user.local.name %>
 <small> <%= user.local.location%></small></h1>
 
 <h3>Bio</h3>
-<%= user.local.bio %>
+<div id="bio">
+	<input type="textField" id="bio-input" placeholder="Bio">
+	<button id="addBio">Submit</button>
+	</div>
+	<button id="editBio">Edit Bio</button>
 
 <hr>
-<h3>Favorite</h3>
+<h3>Favorites</h3>
 
 
 <hr>
 <h3> <%= user.local.name %> Comments </h3>
 <hr>
 <a href="/">Surf Report</a>
+
+<% if(loggedIn) { %>
+	<a href="/logout">Logout</a>
+<% } %>
+<script type="text/javascript">
+//variables
+
+var userBio = $('#bio-input')
+var submitBio = $('#addBio')
+var editBio = $('#editBio')
+
+// submit button
+submitBio.on('click', function(){
+	var resquestSettings = {
+		method: 'post',
+		url: '/profile',
+		data: JSON.stringify({body: userBio.val(), contentType: 'application/json'}
+		function callback(d){
+			console.log(d)
+			populateBioUL()
+		}
+	}
+})
+
+//edit button
+</script>
+</body>
+</html>
