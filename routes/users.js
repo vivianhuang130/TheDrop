@@ -42,12 +42,21 @@ userRouter.get('/logout', (req,res) => {
 	res.redirect('/')
 });
 
+userRouter.patch('/profile', (req, res) =>{
+	console.log(req.body);
+	User.findByIdAndUpdate(req.body.data, {bio:req.body.mytext}, {new:true}, (err, updatedBio) =>{
+		if(err) return console.log(err)
+		res.render('/profile')
+	})
+})
+
 // a method used to authorize a user BEFORE allowing them to proceed to the profile page:
 function isLoggedIn(req, res, next){
 	console.log("its authenticated" + req.isAuthenticated())
 	if(req.isAuthenticated()) return next()
 	res.redirect('/login')
 }
+
 
 userRouter.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}))
 

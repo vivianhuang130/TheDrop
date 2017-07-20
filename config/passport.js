@@ -23,6 +23,7 @@ const
   }, (req, email, password, done) => {
 
     console.log("let us find the user")
+
     console.log(email)
 
       User.findOne({'local.email': email}, (err, user) => {
@@ -39,6 +40,8 @@ const
         newUser.local.name = req.body.name
     		newUser.local.email = email
     		newUser.local.password = newUser.generateHash(password)
+        newUser.bio = req.body.bio
+        newUser.location = req.body.location
         console.log("about to save" + newUser)
     		newUser.save((err) => {
     			if(err) throw err

@@ -151,6 +151,7 @@ app.use(flash());
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
+
 app.use(express.static(__dirname + '/public'));
 
 app.use(function(req, res, next) {
@@ -158,6 +159,7 @@ app.use(function(req, res, next) {
     next()
   }, 1000)
 })
+
 
 //root route
 app.get('/', weatherController.index)
