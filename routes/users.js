@@ -3,6 +3,7 @@ const
 	express = require('express'),
 	passport = require('passport'),
 	userRouter = express.Router()
+	User = require('../models/user'),
 
 userRouter.route('/login')
 	.get((req,res) => {
@@ -23,10 +24,18 @@ userRouter.route('/signup')
 		failureRedirect: '/signup'
 	}));
 
-userRouter.get('/profile', isLoggedIn , (req,res) => {
-	console.log("in profile")
-  res.render('profile', {user: req.user})
+userRouter.get('/profile/', isLoggedIn , (req,res) => {
+			console.log("in profile")
+		  res.render('profile', {user: req.user})
 });
+
+userRouter.get('/profile/:id', (req, res) => {
+	User.findById(req.params.id, (err, user) => {
+		if (err) console.log(err)
+		console.log(user)
+		res.render('users', {user: user})
+	})
+})
 
 userRouter.get('/logout', (req,res) => {
   req.logout()
@@ -40,11 +49,18 @@ function isLoggedIn(req, res, next){
 	res.redirect('/login')
 }
 
+<<<<<<< HEAD
 userRouter.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}))
 
 userRouter.get('/auth/facebook/callback', passport.authenticate('facebook', {
 	successRedirect: '/profile',
 	failureRedirect: '/'
 }))
+=======
+
+
+
+
+>>>>>>> 45f9009c68fcdcb6c0bd35722082542405b2472a
 
 module.exports = userRouter

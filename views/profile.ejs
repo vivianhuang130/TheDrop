@@ -1,146 +1,49 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> df164964564852b575e5af8a8c4315f5657dc9f1
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="/css/styles.css">
-    <title></title>
-  </head>
-  <body>
-    <% include ../public/templates/navbar %>
-
-    <div class='container'>
-      <div class="page-header">
-          <h1><%= user.local.name || user.facebook.name %></h1>
-          <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-      </div>
-      <div class="row">
-          <div class="col-sm-6 col-sm-offset-3">
-              <div class="well">
-
-                  <% if(user.facebook.id) { %>
-
-                      <h3>Facebook</h3>
-                      <p>
-                          <!-- <strong>id</strong>: <%= user.facebook.id %><br>
-                          <strong>token</strong>: <%= user.facebook.token %><br> -->
-                          <strong>email</strong>: <%= user.facebook.email %><br>
-                          <strong>name</strong>: <%= user.facebook.name %>
-                      </p>
-
-                  <% } else { %>
-
-                  <h3>Locally Stored User</h3>
-                      <p>
-                          <strong>Name</strong>: <%= user.local.name %><br>
-
-                      </p>
-
-                  <% } %>
-                  <small> <%= user.local.location%></small></h1>
-
-                  <h3>Bio</h3>
-                  <%= user.local.bio %>
-                    <a href="/editBio">edit</a>
-                    <div class='hr'>
-                      <hr>
-                    </div>
-                  <h3>Favorite Spots</h3>
-
-
-                  <div class='hr'>
-                    <hr>
-                  </div>
-                  <h3> <%= user.local.name %>'s Comments </h3>
-                  <div class='hr'>
-                    <hr>
-                  </div>
-                  <a href="/">Surf Report</a>
-              </div>
-          </div>
-      </div>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <title></title>
+    </head>
+    <body>
+<h1>
+<%= user.local.name %>
+<small> <%= user.local.location%></small></h1>
+<h3>Bio</h3>
+<div id="bio">
+    <input type="textField" id="bio-input" placeholder="Bio">
+    <button id="addBio">Submit</button>
     </div>
-
-  </body>
-</html>
-=======
-<div class="page-header">
-  <h1><%= user.local.name || user.facebook.name %></h1>
-  <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-</div>
-<div class="row">
-  <div class="col-sm-6 col-sm-offset-3">
-    <div class="well">
-
-      <body>
-        <form action="/" method="POST" enctype="multipart/form-data" class="ppForm">
-          <input type="file" name="avatar">
-          <input class="amandaBtn" type="submit" value="submit">
-        </form>
-      </body>
-      <% if(user.facebook.id) { %>
-
-        <%= user.local.name %>
-          <img class="fbPp" src="<%= user.profile_pic %>" alt="">
-
-          <small> <%= user.local.location%></small>
-
-
-
-          <h3>Facebook</h3>
-          <p>
-            <!-- <strong>id</strong>: <%= user.facebook.id %><br>
-                    <strong>token</strong>: <%= user.facebook.token %><br> -->
-            <strong>email</strong>:
-            <%= user.facebook.email %><br>
-              <strong>name</strong>:
-              <%= user.facebook.name %>
-          </p>
-
-          <% } else { %>
-
-            <!-- <h3>Locally Stored User</h3> -->
-            <p>
-              <strong>Name</strong>:
-              <%= user.local.name %><br>
-                <img class="localPp" src="<%= user.profile_pic %>" alt="">
-
-                <hr>
-                <h3> <%= user.local.name %> Comments </h3>
-                <hr>
-                <a href="/">Surf Report</a>
-            </p>
-
-            <% } %>
-
-              <small> <%= user.local.location%></small>
-
-
-              <h3>Bio</h3>
-              <%= user.local.bio %>
-                <a href="/editBio">edit</a>
-                <hr>
-                <h3>Favorite</h3>
-
-
-                <hr>
-                <h3> <%= user.local.name %> Comments </h3>
-                <hr>
-                <a href="/">Surf Report</a>
-    </div>
-  </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <button id="editBio">Edit Bio</button>
+<hr>
+<h3>Favorites</h3>
+<hr>
+<h3> <%= user.local.name %> Comments </h3>
+<hr>
+<a href="/">Surf Report</a>
+<% if(loggedIn) { %>
+    <a href="/logout">Logout</a>
+<% } %>
 <script type="text/javascript">
-  if ($('.localPp').attr("src") || $('.fbPp').attr("src")) {
+//variables
+var userBio = $('#bio-input')
+var submitBio = $('#addBio')
+var editBio = $('#editBio')
+// submit button
+submitBio.on('click', function(){
+    var resquestSettings = {
+        method: 'post',
+        url: '/profile',
+        data: JSON.stringify({body: userBio.val(), contentType: 'application/json'})
+        function callback(d){
+            console.log(d)
+            populateBioUL()
+        }
+    }
+})
+if ($('.localPp').attr("src") || $('.fbPp').attr("src")) {
     $('.amandaBtn').val('Change Picture')
-  }
-<<<<<<< HEAD
+}
 </script>
->>>>>>> 6212cf5e9b25cb9daed4fa9eca46ce9833298381
-=======
-</script>
->>>>>>> df164964564852b575e5af8a8c4315f5657dc9f1
+</body>
+</html>
