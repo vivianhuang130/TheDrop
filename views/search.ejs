@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Original+Surfer" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgQqZ_n8Tx2utBZ1YSPleml2x2yFMApzY&callback=initialize">
@@ -14,12 +15,7 @@
 
     <% include ../public/templates/navbar %>
 
-    <!-- <div class="nav">
-
-      <a href="/login">login</a>
-      <a href="/signup">signup</a>
-    </div> -->
-    <div class='container'>
+     <div class='container'>
       <div>
       <div class='wrapper'>
         <div id='map'></div>
@@ -36,7 +32,7 @@
         el: '#map',
         lat: 34.013321,
         lng: -118.500051,
-        zoom: 12,
+        zoom: 11,
         markers: [
           {lat: 34.013321, lng: -118.500051},
         ]

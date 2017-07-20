@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="https://fonts.googleapis.com/css?family=Original+Surfer" rel="stylesheet">
     <meta charset="utf-8">
     <link rel="stylesheet" href="/css/styles.css">
     <title></title>
@@ -8,10 +9,19 @@
   <body>
     <% include ../public/templates/navbar %>
 
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1949429758633181";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+
     <div class='container'>
+      <div class='container2'>
       <h1>Login</h1>
-      <!-- <a href="/login" class="btn btn-default">Local Login</a>
-      <a href="/signup" class="btn btn-default">Local Signup</a> -->
 
         <form action="/login" method="post">
             <div class="field">
@@ -25,17 +35,19 @@
               </div>
             </div>
 
-            <button type="submit" class="button is-primary">Login</button>
+            <button type="submit" class="button is-info">Login</button>
         </form>
 
         <div class='hr'>
           <hr>
         </div>
 
-        <p><a href="/signup">Signup</a></p>
-        <h2>Login With <a href="/auth/facebook" class="btn btn-primary btn-primary">Facebook</a></h2>
-        <p>Go back <a href="/">Home</a></p>
-
+        <div class="fb-login-button" data-width="20" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div><br><br>
+        <span class='surf-font'>
+          <p>Don't have an account? <a href="/signup">Signup</a></p>
+          <p>Go back <a href="/">Home</a></p>
+        </span>
+      </div>
     </div>
   </body>
 </html>

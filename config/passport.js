@@ -1,7 +1,7 @@
 const
   passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
-  User = require('../models/user'),
+  User = require('../models/User'),
   FacebookStrategy = require('passport-facebook').Strategy,
   configAuth = require('./auth.js')
 
@@ -21,11 +21,10 @@ const
   	passwordField: 'password',
   	passReqToCallback: true
   }, (req, email, password, done) => {
+
     console.log("let us find the user")
 
     console.log(email)
-
-    // process.nextTick(function(){
 
       User.findOne({'local.email': email}, (err, user) => {
     		if(err)  {

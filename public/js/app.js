@@ -6,21 +6,22 @@ var searchButton = $('#search-button')
 var loading = '<h3>loading...</h3>'
 
 var surfSpots = [
-  {name: 'Rincon Beach', city: 'Santa Barbara', spotId: 4197},
-  {name: 'Manhattan Beach', city: 'Manhattan Beach', spotId: 4901},
-  {name: 'Malibu Beach', city: 'Malibu', spotId: 4209},
+  {name: 'Rincon', city: 'Santa Barbara', spotId: 4197},
+  {name: 'Solimar', city: 'Ventura', spotId: 4989},
   {name: 'Zuma Beach', city: 'Malibu', spotId: 4949},
-  {name: 'Venice Beach', city: 'Venice', spotId: 4211},
+  {name: 'Point Dume', city: 'Malibu', spotId: 4947},
+  {name: 'Malibu Beach', city: 'Malibu', spotId: 4209},
   {name: 'Topanga', city: 'Topanga', spotId: 4210},
+  {name: 'Venice Beach', city: 'Venice', spotId: 4211},
   {name: 'El Porto', city: 'El Segundo', spotId: 4900},
+  {name: 'Manhattan Beach', city: 'Manhattan Beach', spotId: 4901},
   {name: 'Hermosa Beach', city: 'Hermosa Beach', spotId: 4902},
+  {name: 'Seal Beach', city: 'Seal Beach', spotId: 4217},
   {name: 'The Wedge', city: 'Newport Beach', spotId: 4232},
   {name: 'Salt Creek Beach', city: 'Dana Point', spotId: 4233},
-  {name: 'Seal Beach', city: 'Seal Beach', spotId: 4217},
   {name: 'T Street', city: 'San Clemente', spotId: 4235},
-  {name: 'Point Dume', city: 'San Clemente', spotId: 4947},
-  {name: 'Lower Trestles', city: 'San Clemente', spotId: 4740},
-  {name: 'Upper Trestles', city: 'San Clemente', spotId: 4738}
+  {name: 'Upper Trestles', city: 'San Clemente', spotId: 4738},
+  {name: 'Lower Trestles', city: 'San Clemente', spotId: 4740}
 ]
 
 locationList = $('#location-list')
@@ -79,14 +80,18 @@ function boxClickHandler() {
   var long
   var temp
   var icon
-  var swellHeight
+  var swellHeightArray
+  var swellHeightMin
+  var swellHeightMax
   var swellPeriodArray
-  var swellPeriodMax
-  var swellPeriodMin
+  var swellPeriodMax = 0
+  var swellPeriodMin = 100
+  var waterTempMin
+  var waterTempMax
   var windSpeed
   var windDirection
   var waterTemp
-  var weatherApiUrl = 'http://api.wunderground.com/api/'
+  var weatherApiUrl = 'https://api.wunderground.com/api/'
   var weatherRequestUrl = `${weatherApiUrl}bcbbbaa572b97c9e/conditions/q/CA/${city}.json`
   var requestSettings = {
     method: 'get',
@@ -97,10 +102,33 @@ function boxClickHandler() {
     console.log(d)
     lat = d.Quickspot.lat
     long = d.Quickspot.lon
+
     swellPeriodArray = d.Surf.swell_period1[0]
-    swellPeriodArray.sort()
-    swellPeriodMin = swellPeriodArray[0]
-    swellPeriodMax = swellPeriodArray[3]
+    for (var i=0; i<swellPeriodArray.length; i++) {
+      if (swellPeriodArray[i] < swellPeriodMin) {
+        swellPeriodMin = swellPeriodArray[i]
+      } else {
+        swellPeriodMin = swellPeriodMin
+      }
+    }
+    for (var i=0; i<swellPeriodArray.length; i++) {
+      if (swellPeriodArray[i] > swellPeriodMax) {
+        swellPeriodMax = swellPeriodArray[i]
+      } else {
+        swellPeriodMax = swellPeriodMax
+      }
+    }
+    // swellPeriodArray.sort()
+    // swellPeriodMax = swellPeriodArray[3]
+
+    swellHeightArray = d.Surf.swell_height1[0]
+    swellHeightArray.sort()
+    swellHeightMin = swellHeightArray[0]
+    swellHeightMax = swellHeightArray[3]
+
+    waterTempMin = d.WaterTemp.watertemp_min
+    waterTempMax = d.WaterTemp.watertemp_max
+
   }
 
   setTimeout(function() {
@@ -109,11 +137,11 @@ function boxClickHandler() {
       lng: long,
       title: `${name}`,
       infoWindow: {
-        content: `<h5>${name}</h5><img src='${icon}' class='weather-pic'/><span id='temp'> ${temp}</span><br><p>${swellPeriodMin}-${swellPeriodMax} seconds</p>`
+        content: `<img src='${icon}' class='weather-pic'/><span class='bold'><p>${name}</p></span><span id='temp'> ${temp}</span><br><br><h4>Surf:</h4><p>${swellHeightMin}-${swellHeightMax} feet</p><p>${swellPeriodMin}-${swellPeriodMax} seconds</p><br><h4>Water Temp:</h4><p>${waterTempMin}-${waterTempMax} F`
 
       }
     });
-  }, 4500)
+  }, 3000)
   $.ajax(requestSettings).done(cb)
 
   //pulls weather info
@@ -121,6 +149,7 @@ function boxClickHandler() {
     type: 'get',
     url: weatherRequestUrl
   }).done(function(data) {
+    console.log(data)
     temp = data.current_observation.temperature_string
     icon = data.current_observation.icon_url
   })
