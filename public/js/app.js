@@ -6,18 +6,21 @@ var searchButton = $('#search-button')
 var loading = '<h3>loading...</h3>'
 
 var surfSpots = [
-  {name: 'Rincon Beach', city: 'Santa Barbara', lat: 34.224096, long: -119.285572},
-  {name: 'Manhattan Beach', city: 'Manhattan Beach', lat: 33.8837, long: -118.414},
-  {name: 'Malibu Beach', city: 'Malibu', lat: 34.013332, long: -118.464713},
-  {name: 'Zuma Beach', city: 'Malibu', lat: 34.011849, long: -118.495228},
-  {name: 'Silver Strand Beach', city: 'Oxnard', lat: 34.091160, long: -119.121102},
-  {name: 'Venice Beach', city: 'Venice', lat: 33.585417, long: -118.281741},
-  {name: 'Port Hueneme Beach', city: 'Oxnard', lat: 34.083381, long: -119.114732},
-  {name: 'Yerba Buena Beach', city: 'Malibu', lat: 34.030603, long: -118.573835},
-  {name: 'Staircase Beach', city: 'Malibu', lat: 34.024740, long: -118.565140},
-  {name: 'Hermosa Beach', city: 'Hermosa Beach', lat: 33.513852, long: -118.241018},
-  {name: '36th Street Beach', city: 'Newport Beach', lat: 33.6147, long: -117.9379},
-  {name: '64th Place Beach', city: 'Long Beach', lat: 33.7464, long: -118.123}
+  {name: 'Rincon Beach', city: 'Santa Barbara', spotId: 4197},
+  {name: 'Manhattan Beach', city: 'Manhattan Beach', spotId: 4901},
+  {name: 'Malibu Beach', city: 'Malibu', spotId: 4209},
+  {name: 'Zuma Beach', city: 'Malibu', spotId: 4949},
+  {name: 'Venice Beach', city: 'Venice', spotId: 4211},
+  {name: 'Topanga', city: 'Topanga', spotId: 4210},
+  {name: 'El Porto', city: 'El Segundo', spotId: 4900},
+  {name: 'Hermosa Beach', city: 'Hermosa Beach', spotId: 4902},
+  {name: 'The Wedge', city: 'Newport Beach', spotId: 4232},
+  {name: 'Salt Creek Beach', city: 'Dana Point', spotId: 4233},
+  {name: 'Seal Beach', city: 'Seal Beach', spotId: 4217},
+  {name: 'T Street', city: 'San Clemente', spotId: 4235},
+  {name: 'Point Dume', city: 'San Clemente', spotId: 4947},
+  {name: 'Lower Trestles', city: 'San Clemente', spotId: 4740},
+  {name: 'Upper Trestles', city: 'San Clemente', spotId: 4738}
 ]
 
 locationList = $('#location-list')
@@ -35,14 +38,9 @@ searchButton.on('click', function() {
   function cb(d) {
     $('#results').empty()
     console.log(d)
-    var temp = d.current_observation.feelslike_string
-    var city = d.current_observation.display_location.city
-    var cityLat = d.current_observation.display_location.latitude
-    var cityLong = d.current_observation.display_location.longitude
-    var icon = d.current_observation.icon_url
 
     $('#results').append(`${city}: ${temp}<br>`)
-    // $('#results').append(`Lat: ${cityLat} Long: ${cityLong}`)
+
     map.addMarker({
       lat: `${cityLat}`,
       lng: `${cityLong}`,
@@ -63,9 +61,8 @@ function populateSpots() {
     var theLi = $('<li>')
     var name = surfSpots[i].name
     theLi.html(name)
-    theLi.attr('lat', surfSpots[i].lat)
-    theLi.attr('long', surfSpots[i].long)
     theLi.attr('city', surfSpots[i].city)
+    theLi.attr('spotId', surfSpots[i].spotId)
     surfLocations.append(theLi)
   }
   $('#surf-locations li').on('click', boxClickHandler)
@@ -74,55 +71,48 @@ populateSpots()
 
 
 function boxClickHandler() {
-  // console.log(this.lat)
-  // var elmnt = this
-  // console.log(elmnt
-  var lat = this.getAttribute('lat')
-  var long = this.getAttribute('long')
+
   var city = this.getAttribute('city')
+  var spotId = this.getAttribute('spotId')
   var name = this.innerHTML
+  var lat
+  var long
   var temp
   var icon
+  var weatherApiUrl = 'http://api.wunderground.com/api/'
+  // var weatherApiKey = process.env.WEATHER_API_KEY
+  var weatherRequestUrl = `${weatherApiUrl}bcbbbaa572b97c9e/conditions/q/CA/${city}.json`
 
-
-  console.log(`${name}: ${lat}, ${long}`)
   // map.setCenter(marker.getPosition());
-
-  // marker: function() {
-  //   map.addMarker({
-  //     lat: `${lat}`,
-  //     lng: `${long}`,
-  //     title: `${name}`,
-  //     infoWindow: {
-  //       content: `<h5>${name}</h5><p>temp</p>`
-  //     }
-  //   });
-  //   map.setCenter(marker.getPosition());
-  // }
 
   var requestSettings = {
     method: 'get',
-    url: '/search/' + this.getAttribute('city')
+    url: '/search/' + this.getAttribute('spotId')
   }
 
   function cb(d) {
-    console.log(d)
-    temp = d.current_observation.feelslike_string
-    // console.log(temp)
-    icon = d.current_observation.icon_url
-    // map.removeMarkers()
+    lat = d.Quickspot.lat
+    long = d.Quickspot.lon
   }
 
   setTimeout(function() {
     map.addMarker({
-      lat: `${lat}`,
-      lng: `${long}`,
+      lat: lat,
+      lng: long,
       title: `${name}`,
       infoWindow: {
         content: `<h5>${name}</h5><img src='${icon}'/><span id='temp'> ${temp}</span>`
       }
     });
-  }, 2000)
+  }, 2500)
   $.ajax(requestSettings).done(cb)
 
+  //pulls weather info
+  $.ajax({
+    type: 'get',
+    url: weatherRequestUrl
+  }).done(function(data) {
+    temp = data.current_observation.temperature_string
+    icon = data.current_observation.icon_url
+  })
 }

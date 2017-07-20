@@ -145,12 +145,7 @@ app.use((req, res, next) => {
 app.set('view engine', "ejs")
 // app.use(ejsLayouts)
 
-app.use(flash());
 
-
-app.use(morgan('dev'));
-app.use(cookieParser());
-app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
 app.use(function(req, res, next) {
@@ -159,13 +154,9 @@ app.use(function(req, res, next) {
   }, 1000)
 })
 
-
-
-///
-
-
 //root route
 app.get('/', weatherController.index)
+
 app.get('/search/:searchTerm', weatherController.search)
 
 //route for user profile (defined in users.js)
@@ -175,4 +166,5 @@ app.use('/', userRoutes)
 /////
 
 app.listen(port, (err) => {
-  console.log(err || `Server is running on ${port}`)});
+  console.log(err || `Server is running on ${port}`)
+});

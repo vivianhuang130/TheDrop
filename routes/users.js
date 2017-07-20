@@ -40,4 +40,11 @@ function isLoggedIn(req, res, next){
 	res.redirect('/login')
 }
 
+userRouter.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}))
+
+userRouter.get('/auth/facebook/callback', passport.authenticate('facebook', {
+	successRedirect: '/profile',
+	failureRedirect: '/'
+}))
+
 module.exports = userRouter
