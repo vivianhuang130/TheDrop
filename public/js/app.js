@@ -91,7 +91,7 @@ function boxClickHandler() {
   var windSpeed
   var windDirection
   var waterTemp
-  var weatherApiUrl = 'http://api.wunderground.com/api/'
+  var weatherApiUrl = 'https://api.wunderground.com/api/'
   var weatherRequestUrl = `${weatherApiUrl}bcbbbaa572b97c9e/conditions/q/CA/${city}.json`
   var requestSettings = {
     method: 'get',
@@ -141,7 +141,7 @@ function boxClickHandler() {
 
       }
     });
-  }, 4000)
+  }, 3000)
   $.ajax(requestSettings).done(cb)
 
   //pulls weather info
@@ -149,6 +149,7 @@ function boxClickHandler() {
     type: 'get',
     url: weatherRequestUrl
   }).done(function(data) {
+    console.log(data)
     temp = data.current_observation.temperature_string
     icon = data.current_observation.icon_url
   })
