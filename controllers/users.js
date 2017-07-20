@@ -7,8 +7,7 @@ function getSignup(request, response) {
 
 // POST /signup
 function postSignup(request, response) {
-  var signupStrategy = passport.authenticate(
-    'local-signup', {
+  var signupStrategy = passport.authenticate('local-signup', {
       successRedirect: '/',
       failureRedirect: '/signup',
       failureFlash: true
@@ -37,7 +36,7 @@ function postLogin(request, response) {
 // get 'form', editBio
 function getEditBio(request, response) {
   console.log("Ok, loaded")
-  response.render("/editBio.ejs")
+  response.render('/editBio.ejs')
   response.redirect('/profile.ejs')
 }
 
@@ -54,7 +53,7 @@ function secret(request, response){
 
 module.exports = {
   getLogin: getLogin,
-  postLogin: postLogin ,
+  postLogin: postLogin,
   getSignup: getSignup,
   postSignup: postSignup,
   getLogout: getLogout,
