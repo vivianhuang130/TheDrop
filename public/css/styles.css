@@ -11,6 +11,10 @@
   font-weight: bold;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 #results {
   font-size: 16px;
 }
@@ -41,7 +45,7 @@
 }
 
 .wrapper {
-  width: 900px;
+  width: 875px;
   height: 500px;
   margin: 0 auto;
   /*background: lightblue;*/
@@ -52,7 +56,7 @@
   height: 475px;
   border: 2px solid rgba(255, 255, 255, 1);
   border-radius: 5px;
-  margin: 10px 10px 10px 25px;
+  margin: 10px 10px 10px 27.5px;
   -webkit-box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.4);
   -moz-box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.4);
   box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.4);
@@ -61,13 +65,13 @@
 
 #location-list {
   float: left;
-  width: 250px;
+  width: 225px;
   height: 475px;
   /*background: gray;*/
   margin: 10px 0 0 10px;
   padding-top: 10px;
   font-size: 16px;
-  line-height: 30px;
+  line-height: 28px;
   background: hsl(171, 100%, 46%);
   border: 2px solid white;
   border-radius: 5px;
