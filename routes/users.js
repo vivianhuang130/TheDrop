@@ -56,11 +56,5 @@ userRouter.get('/auth/facebook/callback', passport.authenticate('facebook', {
 	successRedirect: '/profile',
 	failureRedirect: '/'
 }))
-=======
-
-
-
-
->>>>>>> 45f9009c68fcdcb6c0bd35722082542405b2472a
 
 module.exports = userRouter
