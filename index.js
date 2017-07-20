@@ -145,6 +145,7 @@ app.use((req, res, next) => {
 //ejs config
 app.set('view engine', "ejs")
 
+
 app.use(flash());
 
 app.use(morgan('dev'));

@@ -56,4 +56,5 @@ userRouter.get('/auth/facebook/callback', passport.authenticate('facebook', {
 	failureRedirect: '/'
 }))
 
+
 module.exports = userRouter
