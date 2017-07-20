@@ -16,7 +16,7 @@ const
   passport = require('passport'),
   flash = require('connect-flash'),
   port = 3000,
-  User = require('./models/user'),
+  User = require('./models/User'),
   Comment = require('./models/Comment.js'),
   SurfLocation = require('./models/SurfLocation.js'),
 
@@ -144,11 +144,6 @@ app.use((req, res, next) => {
 
 //ejs config
 app.set('view engine', "ejs")
-// app.use(ejsLayouts)
-
-
-
-
 
 app.use(flash());
 
