@@ -1,5 +1,10 @@
 /*! bulma.io v0.4.2 | MIT License | github.com/jgthms/bulma */
 
+.hr {
+  width: 500px;
+  margin: 0 auto;
+}
+
 .container h1 {
   font-size: 40px;
   padding-bottom: 5px;
@@ -11,8 +16,12 @@
 }
 
 .control {
-  width: 200px;
+  width: 300px;
   margin: 0 auto;
+}
+
+.field input {
+  text-align: center;
 }
 
 .input-box {
@@ -59,7 +68,7 @@
   padding-top: 10px;
   font-size: 16px;
   line-height: 30px;
-  background: lightblue;
+  background: hsl(171, 100%, 46%);
   border: 2px solid white;
   border-radius: 5px;
   -webkit-box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.4);
@@ -73,8 +82,29 @@
   font-style: italic;
 }
 
-img {
+.weather-pic {
   width: 20px;
+}
+
+.navbar {
+  border-bottom: 1px solid rgb(230,230,230);
+}
+
+.navbar img {
+  margin: 0;
+}
+
+#nav-name {
+  padding-left: 6px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+/*body {
+  background: rgb(240,240,240)
+}*/
+
+img {
   line-height: 40px;
   margin-top: 5px;
 }

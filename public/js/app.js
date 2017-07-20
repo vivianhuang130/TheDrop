@@ -79,6 +79,13 @@ function boxClickHandler() {
   var long
   var temp
   var icon
+  var swellHeight
+  var swellPeriodArray
+  var swellPeriodMax
+  var swellPeriodMin
+  var windSpeed
+  var windDirection
+  var waterTemp
   var weatherApiUrl = 'http://api.wunderground.com/api/'
   var weatherRequestUrl = `${weatherApiUrl}bcbbbaa572b97c9e/conditions/q/CA/${city}.json`
   var requestSettings = {
@@ -87,8 +94,13 @@ function boxClickHandler() {
   }
 
   function cb(d) {
+    console.log(d)
     lat = d.Quickspot.lat
     long = d.Quickspot.lon
+    swellPeriodArray = d.Surf.swell_period1[0]
+    swellPeriodArray.sort()
+    swellPeriodMin = swellPeriodArray[0]
+    swellPeriodMax = swellPeriodArray[3]
   }
 
   setTimeout(function() {
@@ -97,10 +109,11 @@ function boxClickHandler() {
       lng: long,
       title: `${name}`,
       infoWindow: {
-        content: `<h5>${name}</h5><img src='${icon}'/><span id='temp'> ${temp}</span>`
+        content: `<h5>${name}</h5><img src='${icon}' class='weather-pic'/><span id='temp'> ${temp}</span><br><p>${swellPeriodMin}-${swellPeriodMax} seconds</p>`
+
       }
     });
-  }, 2500)
+  }, 4500)
   $.ajax(requestSettings).done(cb)
 
   //pulls weather info
