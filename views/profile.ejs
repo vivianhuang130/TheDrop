@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="page-header">
   <h1><%= user.local.name || user.facebook.name %></h1>
   <a href="/logout" class="btn btn-default btn-sm">Logout</a>
@@ -5,6 +6,16 @@
 <div class="row">
   <div class="col-sm-6 col-sm-offset-3">
     <div class="well">
+=======
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+
+>>>>>>> 45f9009c68fcdcb6c0bd35722082542405b2472a
 
       <body>
         <form action="/" method="POST" enctype="multipart/form-data" class="ppForm">
@@ -14,6 +25,7 @@
       </body>
       <% if(user.facebook.id) { %>
 
+<<<<<<< HEAD
         <%= user.local.name %>
           <img class="fbPp" src="<%= user.profile_pic %>" alt="">
 
@@ -70,3 +82,48 @@
     $('.amandaBtn').val('Change Picture')
   }
 </script>
+=======
+<h3>Bio</h3>
+<div id="bio">
+	<input type="textField" id="bio-input" placeholder="Bio">
+	<button id="addBio">Submit</button>
+	</div>
+	<button id="editBio">Edit Bio</button>
+
+<hr>
+<h3>Favorites</h3>
+
+
+<hr>
+<h3> <%= user.local.name %> Comments </h3>
+<hr>
+<a href="/">Surf Report</a>
+
+<% if(loggedIn) { %>
+	<a href="/logout">Logout</a>
+<% } %>
+<script type="text/javascript">
+//variables
+
+var userBio = $('#bio-input')
+var submitBio = $('#addBio')
+var editBio = $('#editBio')
+
+// submit button
+submitBio.on('click', function(){
+	var resquestSettings = {
+		method: 'post',
+		url: '/profile',
+		data: JSON.stringify({body: userBio.val(), contentType: 'application/json'}
+		function callback(d){
+			console.log(d)
+			populateBioUL()
+		}
+	}
+})
+
+//edit button
+</script>
+</body>
+</html>
+>>>>>>> 45f9009c68fcdcb6c0bd35722082542405b2472a
