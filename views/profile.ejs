@@ -34,7 +34,7 @@ submitBio.on('click', function(){
     var resquestSettings = {
         method: 'post',
         url: '/profile',
-        data: JSON.stringify({body: userBio.val(), contentType: 'application/json'}
+        data: JSON.stringify({body: userBio.val(), contentType: 'application/json'})
         function callback(d){
             console.log(d)
             populateBioUL()
@@ -44,7 +44,6 @@ submitBio.on('click', function(){
 if ($('.localPp').attr("src") || $('.fbPp').attr("src")) {
     $('.amandaBtn').val('Change Picture')
 }
-//edit button
 </script>
 </body>
 </html>
