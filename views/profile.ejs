@@ -5,13 +5,13 @@
   <meta charset="UTF-8">
   <title>profile</title>
 
+
 </head>
 
 <body>
   <form action="/" method="POST" enctype="multipart/form-data" class="ppForm">
     <input type="file" name="avatar">
-    <input type="submit" value="submit">
-
+    <input class="amandaBtn" type="submit" value="submit">
   </form>
 </body>
 
@@ -27,7 +27,7 @@
       <% if(user.facebook.id) { %>
 
 <%= user.local.name %>
-<img src="<%= user.profile_pic %>" alt="">
+<img class="fbPp" src="<%= user.profile_pic %>" alt="">
 
 <small> <%= user.local.location%></small>
 
@@ -49,6 +49,8 @@
           <p>
             <strong>Name</strong>:
             <%= user.local.name %><br>
+            <img class="localPp"  src="<%= user.profile_pic %>" alt="">
+
               <hr>
               <h3> <%= user.local.name %> Comments </h3>
               <hr>
@@ -56,6 +58,7 @@
           </p>
 
           <% } %>
+
             <small> <%= user.local.location%></small>
 
 
@@ -73,10 +76,13 @@
     </div>
   </div>
 </div>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
 
-<!-- <script type="text/javascript">
-
-if(${'.profilePic'}.attr(){
-  ${'.ppForm'}.show()
-})
-</script> -->
+if($('.localPp').attr("src") || $('.fbPp').attr("src") ){
+  $('.amandaBtn').val('Change Picture')
+}
+</script>
