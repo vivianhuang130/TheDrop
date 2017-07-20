@@ -87,11 +87,7 @@ function boxClickHandler() {
   var windDirection
   var waterTemp
   var weatherApiUrl = 'http://api.wunderground.com/api/'
-  // var weatherApiKey = process.env.WEATHER_API_KEY
   var weatherRequestUrl = `${weatherApiUrl}bcbbbaa572b97c9e/conditions/q/CA/${city}.json`
-
-  // map.setCenter(marker.getPosition());
-
   var requestSettings = {
     method: 'get',
     url: '/search/' + this.getAttribute('spotId')
