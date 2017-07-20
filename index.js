@@ -15,8 +15,8 @@ const
   cookieParser = require('cookie-parser'),
   passport = require('passport'),
   flash = require('connect-flash'),
-  port = 3000,
   User = require('./models/user'),
+  port = process.env.PORT || 3000,
   Comment = require('./models/Comment.js'),
   SurfLocation = require('./models/SurfLocation.js'),
 
@@ -28,7 +28,7 @@ const
 
 //envir. port
 const
-  mongoConnectionString = process.env.MONGODB_URL || 'mongodb://localhost/the-drop'
+  mongoConnectionString = process.env.MONGODB_URI || 'mongodb://localhost/the-drop'
 
 
 //mongoose connection
