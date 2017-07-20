@@ -21,14 +21,7 @@ const
   	passwordField: 'password',
   	passReqToCallback: true
   }, (req, email, password, done) => {
-    console.log("let us find the user")
-<<<<<<< HEAD
-    console.log(email)
     
-=======
-    console.log(local.email)
-    // process.nextTick(function(){
->>>>>>> 45f9009c68fcdcb6c0bd35722082542405b2472a
       User.findOne({'local.email': email}, (err, user) => {
     		if(err)  {
           console.log("there was an error" + err)
@@ -49,10 +42,6 @@ const
     			return done(null, newUser, null)
     		})
     	})
-<<<<<<< HEAD
-=======
-
->>>>>>> 45f9009c68fcdcb6c0bd35722082542405b2472a
 
   }))
 
