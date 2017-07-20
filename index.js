@@ -144,20 +144,12 @@ app.use((req, res, next) => {
 
 //ejs config
 app.set('view engine', "ejs")
-<<<<<<< HEAD
-// app.use(ejsLayouts)
-
-
-=======
-
-
 
 app.use(flash());
 
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
->>>>>>> 45f9009c68fcdcb6c0bd35722082542405b2472a
 app.use(express.static(__dirname + '/public'));
 
 app.use(function(req, res, next) {
@@ -166,10 +158,6 @@ app.use(function(req, res, next) {
   }, 1000)
 })
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 45f9009c68fcdcb6c0bd35722082542405b2472a
 //root route
 app.get('/', weatherController.index)
 
