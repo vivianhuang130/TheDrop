@@ -8,6 +8,19 @@ body {
   height: 750px;
 }
 
+.align-left {
+  text-align: left;
+}
+
+.align-left p {
+  padding-left: 30px;
+}
+
+.prof_header {
+  font-size: 26px;
+  text-decoration: underline;
+}
+
 h1,h2,h3,form {
   font-family: 'Original Surfer';
 }
