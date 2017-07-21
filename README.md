@@ -49,7 +49,7 @@ The Drop uses:
 
 
 
-####UX Design Ideas
+#### UX Design Ideas
 ![UX](public/images/ux.png)
 
 	Goals for UX:
@@ -57,12 +57,12 @@ The Drop uses:
 		Intuitive Layout and Actions
 		Thematic colors and elements
 
-####Trello
+#### Trello
 
 [The Drop Trello Board](https://trello.com/b/EhADaEb6/the-drop)
 
 
-####User Stories
+#### User Stories
 
 
 	-I want a surf report app so I can save surf spots I have been to or want to go to.
@@ -75,7 +75,7 @@ The Drop uses:
 
 
 
-####Future Additions
+#### Future Additions
 
 	-Ability for users to make their own drop points
 
@@ -84,12 +84,12 @@ The Drop uses:
 	-More of a social platform with blog postings and such
 
 
-####Bugs
+#### Bugs
 
 	-The outside APIs sometimes have a few bugs (mainly Google Maps)
 
 
-####Credit
+#### Credit
 
 [Swrobel Surf Data Git Hub](https://github.com/swrobel/meta-surf-forecast)
 Google Maps
