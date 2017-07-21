@@ -21,23 +21,7 @@ body {
   text-decoration: underline;
 }
 
-/*h1,h2,h3,form {
-  font-family: 'Original Surfer';
-}*/
-
 .surf-font {
-  font-family: 'Original Surfer';
-}
-
-input[type='text'] {
-  font-family: 'Original Surfer';
-}
-
-input[type='password'] {
-  font-family: 'Original Surfer';
-}
-
-button[type='submit'] {
   font-family: 'Original Surfer';
 }
 
