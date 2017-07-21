@@ -11,12 +11,6 @@
       <% include ../public/templates/navbar %>
     <div class='container'>
       <div class='container2'>
-        <div>
-            <form action=“/” method=“POST” enctype=“multipart/form-data” class=“ppForm”>
-              <input type=“file” name=“avatar”>
-              <input class=“amandaBtn” type=“submit” value=“submit”>
-            </form>
-        </div>
 
 
       <div class=“page-header”>
@@ -123,7 +117,7 @@
       }
       setTimeout(function() {
         location.reload()
-      }, 1000)
+      }, 2000)
 
       $.ajax(requestSettings).done(callback)
       })
