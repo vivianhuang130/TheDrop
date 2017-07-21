@@ -62,7 +62,7 @@ userRouter.get('/auth/facebook', passport.authenticate('facebook', {scope: ['ema
 
 userRouter.get('/auth/facebook/callback', passport.authenticate('facebook', {
 	successRedirect: '/profile',
-	failureRedirect: '/'
+	failureRedirect: '/' 
 }))
 
 

@@ -97,5 +97,3 @@ Surfline
 Weather Underground
 Facebook
 Philippe Luchansky's OAuth Guide
-
-
