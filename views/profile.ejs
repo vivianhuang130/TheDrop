@@ -2,122 +2,135 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/styles.css">
+        <link href="https://fonts.googleapis.com/css?family=Original+Surfer" rel="stylesheet">
 
         <title></title>
     </head>
     <body>
-
-  <div>
-      <form action=“/” method=“POST” enctype=“multipart/form-data” class=“ppForm”>
-        <input type=“file” name=“avatar”>
-        <input class=“amandaBtn” type=“submit” value=“submit”>
-      </form>
-  </div>
-
-
-  <div class=“page-header”>
-    <h1><%= user.local.name || user.facebook.name %></h1>
-    <a href=“/logout” class=“btn btn-default btn-sm”>Logout</a>
-  </div>
+      <% include ../public/templates/navbar %>
+    <div class='container'>
+      <div class='container2'>
+        <div>
+            <form action=“/” method=“POST” enctype=“multipart/form-data” class=“ppForm”>
+              <input type=“file” name=“avatar”>
+              <input class=“amandaBtn” type=“submit” value=“submit”>
+            </form>
+        </div>
 
 
+      <div class=“page-header”>
+        <h1><%= user.local.name || user.facebook.name %></h1>
+      </div>
 
-  <div class=“row”>
-    <div class=“col-sm-5 col-sm-offset-3”>
-      <img class=“localPp”  src= "<%= user.profile_pic %>" >
-    </div>
 
-    <div class=“col-sm-5 col-sm-offset-3”>
-      <% if(user.facebook.id) { %>
-        <h2> <%= user.facebook.name %></h2>
-      <% } else { %>
-        <h2> <%= user.local.name %></h2>
+
+      <div class=“row”>
+        <div class=“col-sm-5 col-sm-offset-3”>
+          <img class=“localPp”  src= "<%= user.profile_pic %>" >
+        </div>
+
         <h3> <%= user.location %></h3>
+
+      </div>
+      <div class='hr'>
+        <hr>
+      </div>
+      <div>
+        <h2><span class='prof_header'>Bio</span></h2>
+          <div id="userBioDiv">
+            <span class='align-left'>
+              <p><%= user.bio %></p><br>
+            </span>
+          </div>
+
+          <div id="bio" style="display:none">
+            <div class='field'>
+              <div class='control'>
+                <input type="textField" id="bio-input" class="input is-info" placeholder="Bio"><br>
+              </div>
+            </div>
+              <button type='submit' id="addBio" class='button is-info is-small'>Submit</button>
+
+          </div>
+            <button type='submit' class='button is-info is-small' id="editBio">Edit Bio</button>
+
+      </div>
+
+      <div class='hr'>
+        <hr>
+      </div>
+
+      <div id="favorites">
+        <span class='prof_header'>
+        <h3>Favorites</h3>
+        </span>
+      </div>
+
+      <div class='hr'>
+        <hr>
+      </div>
+
+    <div id="comments">
+      <span class='prof_header'>
+        <h3> <%= user.local.name %>'s Comments </h3>
+      </span>
+    </div>
+
+    <div class='hr'>
+      <hr>
+    </div>
+
+      <a href="/">Surf Report</a>
+
+      <% if(loggedIn) { %>
+        <a href="/logout">Logout</a>
       <% } %>
+
+
+
+      <input id="userId" type="hidden" value="<%=user._id%>">
     </div>
   </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
 
-  <div>
-    <h3>Bio</h3>
-      <div id="userBioDiv">
-        <p><%= user.bio %></p>
-      </div>
-      <div id="bio" style="display:none">
-        <input type="textField" id="bio-input" placeholder="Bio">
-        <button type='submit' id="addBio">Submit</button>
-      </div>
-        <button id="editBio">Edit Bio</button>
-  </div>
-
-<hr>
-
-  <div id="favorites">
-    <h3>Favorites</h3>
-  </div>
-
-<hr>
-
-<div id="comments">
-  <h3> <%= user.local.name %> Comments </h3>
-</div>
-
-<hr>
-
-  <a href="/">Surf Report</a>
-
-  <% if(loggedIn) { %>
-    <a href="/logout">Logout</a>
-  <% } %>
+    var userBio = $('#bio-input')
+    var submitBio = $('#addBio')
+    var editBio = $('#editBio')
+    var bio = $('#bio')
+    var userId = $('#userId')
+    var updatedBio = $('userBioDiv')
 
 
-
-<input id="userId" type="hidden" value="<%=user._id%>">
-
-</body>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script type="text/javascript">
-
-var userBio = $('#bio-input')
-var submitBio = $('#addBio')
-var editBio = $('#editBio')
-var bio = $('#bio')
-var userId = $('#userId')
-var updatedBio = $('userBioDiv')
+    editBio.click(function(){
+      console.log('click')
+      bio.show();
+      editBio.hide();
+    });
 
 
-  editBio.click(function(){
-    console.log('click')
-    bio.show();
-  });
-
-
-  submitBio.click(function(){
-    var requestSettings = {
-        method: 'patch',
-        url: '/profile',
-        data: JSON.stringify({ mytext:userBio.val(), data: userId.val() }),
-        contentType: 'application/json'
+    submitBio.click(function(){
+      var requestSettings = {
+          method: 'patch',
+          url: '/profile',
+          data: JSON.stringify({ mytext:userBio.val(), data: userId.val() }),
+          contentType: 'application/json'
       }
-        function callback(d){
-            console.log(d)
+      function callback(d){
+          console.log(d)
 
-        }
-        setTimeout(function() {
-          location.reload()
-        }, 1000)
+      }
+      setTimeout(function() {
+        location.reload()
+      }, 1000)
 
-        $.ajax(requestSettings).done(callback)
-    })
+      $.ajax(requestSettings).done(callback)
+      })
 
-
-
-
-
-
-  if ($('.localPp').attr("src")){
-      $('.amandaBtn').val('Change Picture')
-  }
-
-</script>
+      if ($('.localPp').attr("src")){
+          $('.amandaBtn').val('Change Picture')
+      }
+    </script>
 </body>
 </html>
