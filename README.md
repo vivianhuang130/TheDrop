@@ -2,7 +2,7 @@
 
 ### The Drop is a full-stack application that uses both internal and outside APIs to provide users a source of surf information on Southern California Surf spots.  
 
-[Drop in Here](https://thedrop.herokuapp.com/)
+Drop in Here <a href="https://github.com/vivianhuang130/TheDrop.git"></a>
 
 
 #### Information about The Drop Development:
